@@ -1,0 +1,5 @@
+﻿CREATE TABLE [luxoft].[RefSuppliers]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(MAX) NOT NULL
+)

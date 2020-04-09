@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="e9f1ffbe-0bf9-4bae-9148-098b0c2f6768" ChangeDateTime="04/09/2020 13:23:19">
+    <Property Name="ElementName" Value="[luxoft].[DeliveryHeaders].[OnDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[luxoft].[DeliveryHeaders]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Date" />
+  </Operation>
+</Operations>
