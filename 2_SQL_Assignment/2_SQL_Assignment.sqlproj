@@ -139,6 +139,10 @@
   <ItemGroup>
     <None Include="Scripts\Script.PostDeployment.FillData.sql" />
     <None Include="2_SQL_Assignment.publish.xml" />
+    <None Include="Scripts\Script.Assigment.1.sql" />
+    <None Include="Scripts\Script.Assigment.2.sql" />
+    <None Include="Scripts\Script.Assigment.3.sql" />
+    <None Include="Scripts\Script.Assigment.4.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

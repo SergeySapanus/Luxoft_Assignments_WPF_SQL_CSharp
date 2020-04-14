@@ -54,6 +54,7 @@ with data as
 (
 	select *
 	from (values
+	(newid(), N'A'),
 	(newid(), N'Alabama'),
 	(newid(), N'Alaska'),
 	(newid(), N'American Samoa'),
@@ -96,15 +97,12 @@ with data as
 (
 	select *
 	from (values
-	(newid(), N'Guangzhou Jinyu Auto Parts Co., Ltd.'),
-	(newid(), N'Guangzhou Comma Car Care Accessories Co., Ltd.'),
-	(newid(), N'Qingzhi Car Parts Co., Ltd.'),
-	(newid(), N'Guangzhou Lanbo Car Accessories Co., Ltd.'),
-	(newid(), N'Guangzhou AES Car Parts Co., Ltd.'),
-	(newid(), N'Guangzhou Power Car Auto Accessories Co., Ltd.'),
-	(newid(), N'Ningbo Ocean Car Accessories Co., Ltd.'),
-	(newid(), N'Shenzhen Anda Cars Parts Co., Ltd.'),
-	(newid(), N'SINGAPURA CARS & PARTS PTE. LTD.')
+	(newid(), N'X'),
+	(newid(), N'Lanbo Car Accessories Co., Ltd.'),
+	(newid(), N'AES Car Parts Co., Ltd.'),
+	(newid(), N'Power Car Auto Accessories Co., Ltd.'),
+	(newid(), N'Ocean Car Accessories Co., Ltd.'),
+	(newid(), N'Anda Cars Parts Co., Ltd.')
 	) as T(Id, Name)
 )
 
@@ -142,11 +140,11 @@ with data as
 		IdRegion,
 		IdSupplier,
 		case 
-			when sns.RowId % 5 = 1 then getdate() + 1
+			when sns.RowId % 5 = 1 then '20000103'
 			when sns.RowId % 5 = 2 then getdate() - 1 
 			when sns.RowId % 5 = 3 then getdate() + 10 
-			when sns.RowId % 5 = 4 then getdate() - 10 
-			else getdate()
+			when sns.RowId % 5 = 4 then '20000130'
+			else '20000101'
 		end Date
 	from 
 	(
@@ -155,7 +153,44 @@ with data as
 			newid() as Id, 
 			r.Id as IdRegion, 
 			s.Id as IdSupplier
-		from luxoft.RefSuppliers s cross join luxoft.RefRegions r
+		from luxoft.RefSuppliers s 
+			cross join luxoft.RefRegions r
+		where (r.Name = 'A' or r.Name like 'M%') and (s.Name like 'X%')
+	) as sns
+)
+
+merge luxoft.DeliveryHeaders as tgt
+using data as src
+on tgt.IdRegion = src.IdRegion and tgt.IdSupplier = src.IdSupplier
+when not matched by target 
+then
+	insert (Id, IdRegion, IdSupplier, IdCurrency, Date)
+	values (Id, IdRegion, IdSupplier, @currencyId, Date);
+
+
+with data as
+(
+	select 
+		Id,
+		IdRegion,
+		IdSupplier,
+		case 
+			when sns.RowId % 5 = 1 then '20000505'
+			when sns.RowId % 5 = 2 then getdate() - 5 
+			when sns.RowId % 5 = 3 then getdate() + 5 
+			when sns.RowId % 5 = 4 then '20000201'
+			else '19990101'
+		end Date
+	from 
+	(
+		select 
+			row_number() over(order by r.Id asc) as RowId, 
+			newid() as Id, 
+			r.Id as IdRegion, 
+			s.Id as IdSupplier
+		from luxoft.RefSuppliers s 
+			cross join luxoft.RefRegions r
+		where (r.Name like 'C%' or r.Name like 'D%') and (s.Name like 'P%' or s.Name like 'O%')
 	) as sns
 )
 
@@ -175,12 +210,12 @@ declare
 	@ModuloRowId tinyint,
 	@MachinePartsHalfQuantity int
 
-select @MachinePartsHalfQuantity = (count(id) / 2) from  luxoft.RefMachineParts
+select @MachinePartsHalfQuantity = (count(id) / 7) from  luxoft.RefMachineParts
 
 declare headers cursor for
 	 select 
 			Id,
-			RowId % 2 as ModuloRowId
+			RowId % 7 as ModuloRowId
 		from 
 		(
 			select 
@@ -190,8 +225,6 @@ declare headers cursor for
 		) as sns
 
 open headers
-
-fetch next from headers into @IdDeliveryHeader, @ModuloRowId
 
 while @@fetch_status = 0
 begin
@@ -220,7 +253,9 @@ begin
 	when not matched by target 
 	then
 		insert (Id, IdDeliveryHeader, IdMachinePart, Number, Price)
-		values (Id, IdDeliveryHeader, IdMachinePart, convert(numeric(18, 0), RAND() * (@ModuloRowId + 1) * 10), convert(money, RAND() * 100) * (@ModuloRowId + 1));
+		values (Id, IdDeliveryHeader, IdMachinePart, 
+			convert(numeric(18, 0), (cast(getdate() as float) * 10000 - cast((cast(getdate() as float) * 10000) as int)) * 10 * (@ModuloRowId + 1)), 
+			convert(money, (cast(getdate() as float) * 10000 - cast((cast(getdate() as float) * 10000) as int)) * 10) * (@ModuloRowId + 1));
 
 end
 
