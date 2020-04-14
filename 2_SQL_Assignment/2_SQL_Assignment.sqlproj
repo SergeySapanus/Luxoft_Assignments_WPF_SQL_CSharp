@@ -121,6 +121,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Security" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\RefMachineParts.sql" />
@@ -135,4 +136,15 @@
   <ItemGroup>
     <RefactorLog Include="2_SQL_Assignment.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Script.PostDeployment.FillData.sql" />
+    <None Include="2_SQL_Assignment.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

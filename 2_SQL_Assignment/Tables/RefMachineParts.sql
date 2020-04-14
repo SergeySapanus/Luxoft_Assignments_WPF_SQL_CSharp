@@ -1,5 +1,9 @@
 ﻿CREATE TABLE [luxoft].[RefMachineParts]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Name] NVARCHAR(MAX) NOT NULL
+    [Name] NVARCHAR(50) NOT NULL
 )
+
+GO
+
+CREATE UNIQUE INDEX [UIX_RefMachineParts_Name] ON [luxoft].[RefMachineParts] ([Name])

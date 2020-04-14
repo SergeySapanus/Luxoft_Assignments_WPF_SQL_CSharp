@@ -7,4 +7,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Date" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="2c9445a3-fad7-4a84-b84c-d320b15e874d" ChangeDateTime="04/10/2020 14:18:26">
+    <Property Name="ElementName" Value="[luxoft].[RefCurrencies].[IX_RefCurrencies_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[luxoft].[RefCurrencies]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_RefCurrencies_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6650dc59-0cff-4ebe-a329-6b5344136003" ChangeDateTime="04/10/2020 14:23:11">
+    <Property Name="ElementName" Value="[luxoft].[RefMachineParts].[IX_RefMachineParts_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[luxoft].[RefMachineParts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_RefMachineParts_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a4e64232-605c-456f-951b-473a71f554fb" ChangeDateTime="04/10/2020 14:23:20">
+    <Property Name="ElementName" Value="[luxoft].[RefMachineParts].[IX_RefMachineParts_Name]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[luxoft].[RefMachineParts]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[UIX_RefMachineParts_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d5b2b876-bd86-4572-863c-d88450069740" ChangeDateTime="04/10/2020 14:24:35">
+    <Property Name="ElementName" Value="[luxoft].[RefRegions].[IX_RefRegions_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[luxoft].[RefRegions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[UIX_RefRegions_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="50519f28-ee57-4555-b2b5-e25ee86c05bd" ChangeDateTime="04/10/2020 14:25:12">
+    <Property Name="ElementName" Value="[luxoft].[RefSuppliers].[IX_RefSuppliers_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[luxoft].[RefSuppliers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[UIX_RefSuppliers_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="92c08adc-3bb9-411e-9f2b-cfb5a07d76a8" ChangeDateTime="04/13/2020 15:22:39">
+    <Property Name="ElementName" Value="[luxoft].[DeliveryLines].[Price]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[luxoft].[DeliveryLines]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdMachinePart" />
+  </Operation>
 </Operations>
