@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{2EE769C3-8
 		Data\data.txt = Data\data.txt
 	EndProjectSection
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "2_SQL_Assignment", "2_SQL_Assignment\2_SQL_Assignment.sqlproj", "{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,12 @@ Global
 		{14003F51-E7FB-4EDA-8F59-44987752850F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14003F51-E7FB-4EDA-8F59-44987752850F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14003F51-E7FB-4EDA-8F59-44987752850F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753E3D15-8B4A-4752-A163-B0A89B2BF2F9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
