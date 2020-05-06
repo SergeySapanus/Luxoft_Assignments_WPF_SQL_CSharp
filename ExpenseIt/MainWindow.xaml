@@ -5,5 +5,5 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:local="clr-namespace:ExpenseIt"
                    mc:Ignorable="d"
-                   Title="ExpenseIt" Height="350" Width="500">
+                   Title="ExpenseIt" Height="350" Width="500" Source="ExpenseItHome.xaml">
 </NavigationWindow>
