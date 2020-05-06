@@ -14,6 +14,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "2_SQL_Assignment", "2_SQL_A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseIt", "ExpenseIt\ExpenseIt.csproj", "{07CC66BB-8F35-4997-88BC-F9C5F06A0103}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_WPF_Assignment", "3_WPF_Assignment\3_WPF_Assignment.csproj", "{628F1342-AC66-447A-B29B-5E6E6D7CA48F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{07CC66BB-8F35-4997-88BC-F9C5F06A0103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07CC66BB-8F35-4997-88BC-F9C5F06A0103}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07CC66BB-8F35-4997-88BC-F9C5F06A0103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628F1342-AC66-447A-B29B-5E6E6D7CA48F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628F1342-AC66-447A-B29B-5E6E6D7CA48F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628F1342-AC66-447A-B29B-5E6E6D7CA48F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628F1342-AC66-447A-B29B-5E6E6D7CA48F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
