@@ -20,21 +20,21 @@ namespace _1_CSharp_Assignment
             {
                 var encoding = GetEncoding(DATA_FILE_PATH);
                 var sortedByWord = GetSortedDataFromFile(DATA_FILE_PATH, encoding, COUNT_UNIQUE_WORDS_THRESHOLD, LENGTH_WORD_THRESHOLD);
+#if DEBUG
+                for (var i = 0; i < sortedByWord.Count; i++)
+                {
+                    Console.WriteLine($"{sortedByWord.Keys[i]}:{sortedByWord.Values[i]}");
+                }
 
-                //for (var i = 0; i < sortedList.Count; i++)
-                //{
-                //    Console.WriteLine($"{sortedList.Keys[i]}:{sortedList.Values[i]}");
-                //}
-
-                //Console.WriteLine(new string('-', 10));
-
+                Console.WriteLine(new string('-', 10));
+#endif
                 var sortedByNumber = QuickSortByNumber(sortedByWord);
-
-                //foreach (var pair in sortedArray)
-                //{
-                //    Console.WriteLine($"{pair.Key}:{pair.Value}");
-                //}
-
+#if DEBUG
+                foreach (var pair in sortedByNumber)
+                {
+                    Console.WriteLine($"{pair.Key}:{pair.Value}");
+                }
+#endif
                 using var file = new StreamWriter(RESULTS_FILE_PATH, false, encoding);
                 foreach (var pair in sortedByNumber)
                     file.WriteLine($"{pair.Key} {pair.Value}");
