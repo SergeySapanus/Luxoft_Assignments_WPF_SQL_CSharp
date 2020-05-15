@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3_WPF_Assignment"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="250" Width="500">
+    <Grid Margin="10,0,10,10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Name="lNumber" Grid.Column="0" Grid.Row="0" Style="{StaticResource headerLabelStyle}">
+            Number:
+        </Label>
+
+        <TextBox Name="tbNumber" Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}">
+            
+        </TextBox>
     </Grid>
 </Window>
