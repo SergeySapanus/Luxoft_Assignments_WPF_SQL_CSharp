@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_3_WPF_Assignment"
+        xmlns:viewModels="clr-namespace:_3_WPF_Assignment.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="250" Width="500">
+    <Window.DataContext>
+        <viewModels:PrimesViewModel/>
+    </Window.DataContext>
     <Grid Margin="10,0,10,10">
 
         <Grid.ColumnDefinitions>
@@ -17,14 +21,34 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Name="lNumber" Grid.Column="0" Grid.Row="0" Style="{StaticResource headerLabelStyle}">
-            Number:
-        </Label>
+        <Label Name="lNumber" 
+               Grid.Column="0" Grid.Row="0" 
+               Style="{StaticResource headerLabelStyle}"
+               Content="Number:"/>
 
-        <TextBox Name="tbNumber" Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}">
-            
-        </TextBox>
+        <TextBox Name="tbNumber" 
+                 Grid.Column="1" Grid.Row="0" 
+                 Style="{StaticResource textBoxStyle}"
+                 Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Name="lPrimes" 
+               Grid.Column="0" Grid.Row="1" 
+               Style="{StaticResource headerLabelStyle}"
+               Content="{Binding PrimesUpCaption, Mode=OneWay}"/>
+
+        <ListBox  Name="lbPrimes" 
+                  Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"  
+                  Style="{StaticResource listBoxStyle}"
+                  ItemsSource="{Binding Primes}"/>
+
+        <Button  Grid.Column="0" Grid.Row="2" 
+                 Style="{StaticResource buttonStyle}"
+                 Content="OK" 
+                 Margin="5" 
+                 Command="{Binding OKCommand}"
+                 CommandParameter="{Binding ElementName=lbPrimes, Path=SelectedItem}"/>
     </Grid>
 </Window>

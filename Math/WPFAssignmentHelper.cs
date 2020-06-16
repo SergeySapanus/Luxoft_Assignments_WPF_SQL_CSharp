@@ -5,17 +5,29 @@ namespace MathHelpers
 {
     public class WPFAssignmentHelper
     {
-        private const long COUNT_NUMBERS_PER_CHUNK = 10;
+        #region Constants
 
-        public static IEnumerable<long> GetPrimesByEratosthenesSieve(long sqrtLimit, long limit)
+        private const ulong COUNT_NUMBERS_PER_CHUNK = 10UL;
+
+        #endregion Constants
+
+        public static ulong Power2(ulong input)
         {
-            var rangeFrom = 0L;
+            unchecked
+            {
+                return (ulong)Math.Pow(input, 2);
+            }
+        }
+
+        public static IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit, ulong limit)
+        {
+            var rangeFrom = 0UL;
 
             var countChunks = limit / COUNT_NUMBERS_PER_CHUNK;
             if (limit % COUNT_NUMBERS_PER_CHUNK > 0)
                 countChunks++;
 
-            for (var p = 1; p <= countChunks; p++)
+            for (var p = 1UL; p <= countChunks; p++)
             {
                 var rangeTo = p * COUNT_NUMBERS_PER_CHUNK;
                 if (rangeTo > limit)
@@ -28,18 +40,18 @@ namespace MathHelpers
             }
         }
 
-        private static IEnumerable<long> GetPrimesByEratosthenesSieve(long sqrtLimit, long rangeFrom, long rangeTo)
+        private static IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit, ulong rangeFrom, ulong rangeTo)
         {
-            if (sqrtLimit < 2L)
+            if (sqrtLimit < 2UL)
                 throw new ArgumentException(nameof(sqrtLimit));
 
             var countNumbersPerChunk = rangeTo - rangeFrom;
-            if (countNumbersPerChunk <= 0)
+            if (countNumbersPerChunk <= 0UL)
                 throw new ArgumentException($"{nameof(rangeFrom)}, {nameof(rangeTo)}");
 
             var composite = new bool[countNumbersPerChunk + 1];
 
-            var i = 1L;
+            var i = 1UL;
 
             for (; i <= sqrtLimit; i++)
             {
@@ -50,8 +62,7 @@ namespace MathHelpers
                 }
 
                 // Chunk's scope. Skip not prime number.
-                var indexInChunk = i - rangeFrom;
-                if (indexInChunk >= 0 && composite[indexInChunk])
+                if (i >= rangeFrom && composite[i - rangeFrom])
                 {
                     continue;
                 }
@@ -72,20 +83,20 @@ namespace MathHelpers
                 // Mark not prime number.
                 for (var j = pwr2; j <= rangeTo; j += i)
                 {
-                    indexInChunk = j - rangeFrom;
-                    if (indexInChunk >= 0)
-                        composite[indexInChunk] = true;
+                    if (j >= rangeFrom)
+                    {
+                        composite[j - rangeFrom] = true;
+                    }
                 }
             }
-
-            i++;
 
             // Return not marked primes.
             for (; i <= rangeTo; i++)
             {
-                var indexInChunk = i - rangeFrom;
-                if (indexInChunk >= 0 && !composite[indexInChunk])
+                if (i >= rangeFrom && !composite[i - rangeFrom])
+                {
                     yield return i;
+                }
             }
         }
     }
