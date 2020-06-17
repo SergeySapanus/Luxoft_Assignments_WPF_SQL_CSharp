@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using MathHelpers;
-using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.Models
 {
-    public class PrimesModel : BindableBase, IDisposable
+    public class PrimesModel
     {
         #region Fields
 
@@ -14,25 +12,27 @@ namespace _3_WPF_Assignment.Models
 
         #endregion Fields
 
+        #region Properties
+
+        public ReadOnlyObservableCollection<ulong> Primes => _primesReadOnly;
+
+        #endregion Properties
+
         public PrimesModel()
         {
             _primes = new ObservableCollection<ulong>();
             _primesReadOnly = new ReadOnlyObservableCollection<ulong>(_primes);
         }
 
-        public ReadOnlyObservableCollection<ulong> GetPrimes(ulong? input)
+        public void CalculatePrimes(ulong? input)
         {
             _primes.Clear();
 
             if (!input.HasValue)
-            {
-                return _primesReadOnly;
-            }
+                return;
 
             var primes = WPFAssignmentHelper.GetPrimesByEratosthenesSieve(input.Value, WPFAssignmentHelper.Power2(input.Value));
             _primes.AddRange(primes);
-
-            return _primesReadOnly;
         }
 
         public string GetPrimesUpCaption(ulong? input)
@@ -40,15 +40,7 @@ namespace _3_WPF_Assignment.Models
             if (!input.HasValue)
                 return "Enter number, please";
 
-            return $"Primes up to{Environment.NewLine}{WPFAssignmentHelper.Power2(input.Value)}:";
+            return $"Primes up to {WPFAssignmentHelper.Power2(input.Value)}:";
         }
-
-        #region IDisposable
-
-        public void Dispose()
-        {
-        }
-
-        #endregion IDisposable
     }
 }

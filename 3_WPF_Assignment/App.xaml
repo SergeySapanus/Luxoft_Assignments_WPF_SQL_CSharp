@@ -5,13 +5,13 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="baseTextStyle" TargetType="{x:Type Control}" >
-            <Setter Property="FontFamily" Value="Verdana"></Setter>
-            <Setter Property="FontWeight" Value="Normal"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
 
         <Style x:Key="blueOnWhiteStyle" BasedOn= "{StaticResource baseTextStyle}" TargetType="{x:Type Control}" >
-            <Setter Property="Foreground" Value="#4E87D4"></Setter>
+            <Setter Property="Foreground" Value="#4E87D4"/>
             <Setter Property="Background" Value="White" />
         </Style>
 
@@ -20,28 +20,27 @@
             <Setter Property="Background" Value="#4E87D4" />
         </Style>
 
-        <Style x:Key="greenOnWhiteStyle" BasedOn= "{StaticResource baseTextStyle}" TargetType="{x:Type Control}" >
-            <Setter Property="Foreground" Value="DarkGreen"></Setter>
-            <Setter Property="Background" Value="White" />
-        </Style>
-
         <Style x:Key="whiteOnGreenStyle" BasedOn= "{StaticResource baseTextStyle}" TargetType="{x:Type Control}" >
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Background" Value="DarkGreen" />
         </Style>
 
+        <Style x:Key="whiteOnMaroonStyle" BasedOn= "{StaticResource baseTextStyle}" TargetType="{x:Type Control}" >
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Maroon" />
+        </Style>
+
         <Style x:Key="headerLabelStyle" BasedOn= "{StaticResource blueOnWhiteStyle}" TargetType="{x:Type Label}">
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
 
         <Style x:Key="textBoxStyle"  BasedOn= "{StaticResource blueOnWhiteStyle}" TargetType="{x:Type TextBox}">
-            <Setter Property="MaxLines" Value="1"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="MaxLines" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style x:Key="listBoxStyle" BasedOn= "{StaticResource blueOnWhiteStyle}" TargetType="{x:Type  ListBox}">
-            <Setter Property="Padding" Value="5" />
-        </Style>
+        <Style x:Key="listBoxStyle" BasedOn= "{StaticResource blueOnWhiteStyle}" TargetType="{x:Type  ListBox}"/>
 
         <Style x:Key="buttonStyle" BasedOn= "{StaticResource whiteOnBlueStyle}" TargetType="{x:Type Button}">
             <Setter Property="Width" Value="125" />

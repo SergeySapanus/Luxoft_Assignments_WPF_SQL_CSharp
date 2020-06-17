@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:_3_WPF_Assignment"
         xmlns:viewModels="clr-namespace:_3_WPF_Assignment.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="250" Width="500">
+        Title="MainWindow" Height="250" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True">
     <Window.DataContext>
-        <viewModels:PrimesViewModel/>
+        <viewModels:MainVM/>
     </Window.DataContext>
     <Grid Margin="10,0,10,10">
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -25,30 +26,31 @@
         </Grid.RowDefinitions>
 
         <Label Name="lNumber" 
-               Grid.Column="0" Grid.Row="0" 
+               Grid.Column="1" Grid.Row="0" 
                Style="{StaticResource headerLabelStyle}"
                Content="Number:"/>
 
         <TextBox Name="tbNumber" 
-                 Grid.Column="1" Grid.Row="0" 
+                 Grid.Column="2" Grid.Row="0" 
                  Style="{StaticResource textBoxStyle}"
-                 Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Name="lPrimes" 
-               Grid.Column="0" Grid.Row="1" 
+               Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
                Style="{StaticResource headerLabelStyle}"
-               Content="{Binding PrimesUpCaption, Mode=OneWay}"/>
+               Content="{Binding PrimesVM.PrimesUpCaption, Mode=OneWay}"/>
 
         <ListBox  Name="lbPrimes" 
-                  Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"  
+                  Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"  
                   Style="{StaticResource listBoxStyle}"
-                  ItemsSource="{Binding Primes}"/>
+                  ItemsSource="{Binding PrimesVM.Primes}"
+                  SelectedItem="{Binding SelectedPrime, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button  Grid.Column="0" Grid.Row="2" 
+        <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" 
                  Style="{StaticResource buttonStyle}"
                  Content="OK" 
                  Margin="5" 
                  Command="{Binding OKCommand}"
-                 CommandParameter="{Binding ElementName=lbPrimes, Path=SelectedItem}"/>
+                 CommandParameter="{Binding ElementName=lbPrimes}"/>
     </Grid>
 </Window>

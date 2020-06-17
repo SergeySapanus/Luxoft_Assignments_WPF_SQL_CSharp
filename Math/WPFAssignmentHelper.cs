@@ -90,6 +90,9 @@ namespace MathHelpers
                 }
             }
 
+            if (i <= sqrtLimit)
+                i++;
+
             // Return not marked primes.
             for (; i <= rangeTo; i++)
             {
