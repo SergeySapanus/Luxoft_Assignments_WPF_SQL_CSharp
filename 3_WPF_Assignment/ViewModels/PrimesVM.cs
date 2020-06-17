@@ -1,5 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using _3_WPF_Assignment.Events;
 using _3_WPF_Assignment.Models;
+using Prism.Events;
 using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
@@ -8,9 +11,9 @@ namespace _3_WPF_Assignment.ViewModels
     {
         #region Fields
 
-        private ulong? _number;
-
         private readonly PrimesModel _primesModel = new PrimesModel();
+
+        private ulong? _number;
 
         #endregion Fields
         #region Properties
@@ -31,6 +34,14 @@ namespace _3_WPF_Assignment.ViewModels
         public ReadOnlyObservableCollection<ulong> Primes => _primesModel.Primes;
 
         #endregion Properties
+
+        public PrimesVM(IEventAggregator aggregator)
+        {
+            if (aggregator == null)
+                throw new ArgumentException(nameof(aggregator));
+
+            aggregator.GetEvent<NumberEvent>().Subscribe(number => Number = number);
+        }
 
         public void CalculatePrimes() => _primesModel.CalculatePrimes(_number);
     }

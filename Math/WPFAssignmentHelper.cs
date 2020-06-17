@@ -42,9 +42,6 @@ namespace MathHelpers
 
         private static IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit, ulong rangeFrom, ulong rangeTo)
         {
-            if (sqrtLimit < 2UL)
-                throw new ArgumentException(nameof(sqrtLimit));
-
             var countNumbersPerChunk = rangeTo - rangeFrom;
             if (countNumbersPerChunk <= 0UL)
                 throw new ArgumentException($"{nameof(rangeFrom)}, {nameof(rangeTo)}");

@@ -65,8 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Events\NumberEvent.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
+    <Compile Include="ViewModels\InputVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\PrimesVM.cs" />
     <Page Include="MainWindow.xaml">

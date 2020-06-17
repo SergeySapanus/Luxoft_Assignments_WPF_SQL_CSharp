@@ -1,5 +1,8 @@
-﻿using _3_WPF_Assignment.Services;
+﻿using System;
+using System.ComponentModel;
+using _3_WPF_Assignment.Services;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
@@ -9,24 +12,13 @@ namespace _3_WPF_Assignment.ViewModels
         #region Fields
 
         private readonly IMessageBoxService _messageBoxService;
-
-        private string _input;
         private object _selectedPrime;
 
         #endregion Fields
         #region Properties
 
         public PrimesVM PrimesVM { get; }
-
-        public string Input
-        {
-            get => _input;
-            set
-            {
-                SetProperty(ref _input, value);
-                SetNumber();
-            }
-        }
+        public InputVM InputVM { get; }
 
         public object SelectedPrime
         {
@@ -34,25 +26,28 @@ namespace _3_WPF_Assignment.ViewModels
             set => SetProperty(ref _selectedPrime, value);
         }
 
-        public DelegateCommand<object> OKCommand { get; }
-
         #endregion Properties
 
-        public MainVM(IMessageBoxService messageBoxService)
+        public MainVM(IMessageBoxService messageBoxService, IEventAggregator aggregator)
         {
-            _messageBoxService = messageBoxService;
+            _messageBoxService = messageBoxService ?? throw new ArgumentException(nameof(messageBoxService));
 
-            PrimesVM = new PrimesVM();
+            InputVM = new InputVM(aggregator);
+            PrimesVM = new PrimesVM(aggregator);
 
             OKCommand = new DelegateCommand<object>(OKCommand_Execute, OKCommand_CanExecute);
             OKCommand.ObservesProperty(() => SelectedPrime);
             OKCommand.ObservesProperty(() => PrimesVM.Number);
         }
 
-        public MainVM() : this(new MessageBoxService())
+        public MainVM() : this(new MessageBoxService(), new EventAggregator())
         {
             //throw new System.NotImplementedException();
         }
+
+        #region Commands
+
+        public DelegateCommand<object> OKCommand { get; }
 
         private bool OKCommand_CanExecute(object sender)
         {
@@ -64,16 +59,6 @@ namespace _3_WPF_Assignment.ViewModels
             _messageBoxService.ShowMessage($"You have chosen {PrimesVM.Number} and {SelectedPrime}");
         }
 
-        private void SetNumber()
-        {
-            if (string.IsNullOrWhiteSpace(_input) || !ulong.TryParse(_input, out var result))
-            {
-                PrimesVM.Number = null;
-            }
-            else
-            {
-                PrimesVM.Number = result;
-            }
-        }
+        #endregion Commands
     }
 }

@@ -33,7 +33,7 @@
         <TextBox Name="tbNumber" 
                  Grid.Column="2" Grid.Row="0" 
                  Style="{StaticResource textBoxStyle}"
-                 Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding InputVM.Input, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Name="lPrimes" 
                Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
