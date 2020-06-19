@@ -7,7 +7,7 @@ using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
 {
-    public class MainVM : BindableBase
+    public class ShellViewModel : BindableBase
     {
         #region Fields
 
@@ -17,8 +17,8 @@ namespace _3_WPF_Assignment.ViewModels
         #endregion Fields
         #region Properties
 
-        public PrimesVM PrimesVM { get; }
-        public InputVM InputVM { get; }
+        public PrimesViewModel PrimesViewModel { get; }
+        public InputViewModel InputViewModel { get; }
 
         public object SelectedPrime
         {
@@ -28,19 +28,19 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
-        public MainVM(IMessageBoxService messageBoxService, IEventAggregator aggregator)
+        public ShellViewModel(IMessageBoxService messageBoxService, IEventAggregator aggregator)
         {
             _messageBoxService = messageBoxService ?? throw new ArgumentException(nameof(messageBoxService));
 
-            InputVM = new InputVM(aggregator);
-            PrimesVM = new PrimesVM(aggregator);
+            InputViewModel = new InputViewModel(aggregator);
+            PrimesViewModel = new PrimesViewModel(aggregator);
 
             OKCommand = new DelegateCommand<object>(OKCommand_Execute, OKCommand_CanExecute);
             OKCommand.ObservesProperty(() => SelectedPrime);
-            OKCommand.ObservesProperty(() => PrimesVM.Number);
+            OKCommand.ObservesProperty(() => PrimesViewModel.Number);
         }
 
-        public MainVM() : this(new MessageBoxService(), new EventAggregator())
+        public ShellViewModel() : this(new MessageBoxService(), new EventAggregator())
         {
             //throw new System.NotImplementedException();
         }
@@ -51,12 +51,12 @@ namespace _3_WPF_Assignment.ViewModels
 
         private bool OKCommand_CanExecute(object sender)
         {
-            return PrimesVM.Number.HasValue && SelectedPrime != null;
+            return PrimesViewModel.Number.HasValue && SelectedPrime != null;
         }
 
         private void OKCommand_Execute(object sender)
         {
-            _messageBoxService.ShowMessage($"You have chosen {PrimesVM.Number} and {SelectedPrime}");
+            _messageBoxService.ShowMessage($"You have chosen {PrimesViewModel.Number} and {SelectedPrime}");
         }
 
         #endregion Commands

@@ -6,7 +6,7 @@ using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
 {
-    public class InputVM : BindableBase
+    public class InputViewModel : BindableBase
     {
         #region Fields
 
@@ -66,7 +66,7 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
-        public InputVM(IEventAggregator aggregator)
+        public InputViewModel(IEventAggregator aggregator)
         {
             _aggregator = aggregator ?? throw new ArgumentException(nameof(aggregator));
         }

@@ -7,7 +7,7 @@ using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
 {
-    public class PrimesVM : BindableBase
+    public class PrimesViewModel : BindableBase
     {
         #region Fields
 
@@ -35,7 +35,7 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
-        public PrimesVM(IEventAggregator aggregator)
+        public PrimesViewModel(IEventAggregator aggregator)
         {
             if (aggregator == null)
                 throw new ArgumentException(nameof(aggregator));

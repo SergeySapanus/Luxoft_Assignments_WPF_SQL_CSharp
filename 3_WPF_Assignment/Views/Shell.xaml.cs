@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
 
-namespace _3_WPF_Assignment
+namespace _3_WPF_Assignment.Views
 {
-    public partial class MainWindow : Window
+    public partial class Shell : Window
     {
-        public MainWindow()
+        public Shell()
         {
             InitializeComponent();
 
