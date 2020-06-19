@@ -32,17 +32,12 @@ namespace _3_WPF_Assignment.ViewModels
         {
             _messageBoxService = messageBoxService ?? throw new ArgumentException(nameof(messageBoxService));
 
-            InputViewModel = new InputViewModel(aggregator);
-            PrimesViewModel = new PrimesViewModel(aggregator);
+            //InputViewModel = new InputViewModel(aggregator);
+            //PrimesViewModel = new PrimesViewModel(aggregator);
 
             OKCommand = new DelegateCommand<object>(OKCommand_Execute, OKCommand_CanExecute);
             OKCommand.ObservesProperty(() => SelectedPrime);
             OKCommand.ObservesProperty(() => PrimesViewModel.Number);
-        }
-
-        public ShellViewModel() : this(new MessageBoxService(), new EventAggregator())
-        {
-            //throw new System.NotImplementedException();
         }
 
         #region Commands
