@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using _3_WPF_Assignment.Events;
 using _3_WPF_Assignment.Models;
 using Prism.Events;
