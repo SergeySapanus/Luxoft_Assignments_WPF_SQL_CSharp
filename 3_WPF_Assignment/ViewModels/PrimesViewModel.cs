@@ -11,7 +11,7 @@ namespace _3_WPF_Assignment.ViewModels
     {
         #region Fields
 
-        private readonly PrimesModel _primesModel = new PrimesModel();
+        private readonly PrimesModel _primesModel;
 
         private ulong? _number;
 
@@ -35,10 +35,9 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
-        public PrimesViewModel(IEventAggregator aggregator)
+        public PrimesViewModel(IEventAggregator aggregator, PrimesModel primesModel)
         {
-            if (aggregator == null)
-                throw new ArgumentException(nameof(aggregator));
+            _primesModel = primesModel;
 
             aggregator.GetEvent<NumberEvent>().Subscribe(number => Number = number);
         }

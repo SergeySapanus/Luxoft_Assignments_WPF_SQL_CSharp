@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using _3_WPF_Assignment.Commands;
+using _3_WPF_Assignment.Models;
 using _3_WPF_Assignment.Services;
 using _3_WPF_Assignment.ViewModels;
 using _3_WPF_Assignment.Views;
@@ -21,6 +22,8 @@ namespace _3_WPF_Assignment
             container.Register<ShellViewModel, ShellViewModel>(Reuse.Singleton);
 
             container.RegisterMapping<IShellViewModel, ShellViewModel>();
+
+            container.Register<PrimesModel, PrimesModel>();
 
             container.Register<PrimesViewModel, PrimesViewModel>();
             container.Register<InputViewModel, InputViewModel>();
