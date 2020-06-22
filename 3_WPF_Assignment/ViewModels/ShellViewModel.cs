@@ -17,8 +17,8 @@ namespace _3_WPF_Assignment.ViewModels
         #endregion Fields
         #region Properties
 
-        public PrimesViewModel PrimesViewModel { get; }
-        public InputViewModel InputViewModel { get; }
+        public PrimesViewModel PrimesViewModel { get; set; }
+        public InputViewModel InputViewModel { get; set; }
 
         public object SelectedPrime
         {
@@ -31,9 +31,6 @@ namespace _3_WPF_Assignment.ViewModels
         public ShellViewModel(IMessageBoxService messageBoxService, IEventAggregator aggregator)
         {
             _messageBoxService = messageBoxService ?? throw new ArgumentException(nameof(messageBoxService));
-
-            //InputViewModel = new InputViewModel(aggregator);
-            //PrimesViewModel = new PrimesViewModel(aggregator);
 
             OKCommand = new DelegateCommand<object>(OKCommand_Execute, OKCommand_CanExecute);
             OKCommand.ObservesProperty(() => SelectedPrime);
