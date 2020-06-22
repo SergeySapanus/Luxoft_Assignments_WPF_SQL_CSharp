@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using _3_WPF_Assignment.Events;
 using Prism.Events;
 using Prism.Mvvm;
@@ -68,7 +67,7 @@ namespace _3_WPF_Assignment.ViewModels
 
         public InputViewModel(IEventAggregator aggregator)
         {
-            _aggregator = aggregator ?? throw new ArgumentException(nameof(aggregator));
+            _aggregator = aggregator;
         }
 
         private void SetNumber()

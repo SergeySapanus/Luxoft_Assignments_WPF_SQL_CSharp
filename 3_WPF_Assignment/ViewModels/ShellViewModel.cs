@@ -1,24 +1,27 @@
-﻿using System;
-using System.ComponentModel;
-using _3_WPF_Assignment.Services;
-using Prism.Commands;
-using Prism.Events;
+﻿using _3_WPF_Assignment.Commands;
 using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
 {
-    public class ShellViewModel : BindableBase
+    public class ShellViewModel : BindableBase, IShellViewModel
     {
         #region Fields
 
-        private readonly IMessageBoxService _messageBoxService;
         private object _selectedPrime;
 
         #endregion Fields
         #region Properties
 
+        public OKCommand OKCommand { get; set; }
+
         public PrimesViewModel PrimesViewModel { get; set; }
         public InputViewModel InputViewModel { get; set; }
+
+        #endregion Properties
+
+        #region IShellViewModel
+
+        public ulong? Number => PrimesViewModel.Number;
 
         public object SelectedPrime
         {
@@ -26,31 +29,6 @@ namespace _3_WPF_Assignment.ViewModels
             set => SetProperty(ref _selectedPrime, value);
         }
 
-        #endregion Properties
-
-        public ShellViewModel(IMessageBoxService messageBoxService, IEventAggregator aggregator)
-        {
-            _messageBoxService = messageBoxService ?? throw new ArgumentException(nameof(messageBoxService));
-
-            OKCommand = new DelegateCommand<object>(OKCommand_Execute, OKCommand_CanExecute);
-            OKCommand.ObservesProperty(() => SelectedPrime);
-            OKCommand.ObservesProperty(() => PrimesViewModel.Number);
-        }
-
-        #region Commands
-
-        public DelegateCommand<object> OKCommand { get; }
-
-        private bool OKCommand_CanExecute(object sender)
-        {
-            return PrimesViewModel.Number.HasValue && SelectedPrime != null;
-        }
-
-        private void OKCommand_Execute(object sender)
-        {
-            _messageBoxService.ShowMessage($"You have chosen {PrimesViewModel.Number} and {SelectedPrime}");
-        }
-
-        #endregion Commands
+        #endregion IShellViewModel
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using _3_WPF_Assignment.Commands;
 using _3_WPF_Assignment.Services;
 using _3_WPF_Assignment.ViewModels;
 using _3_WPF_Assignment.Views;
@@ -13,22 +14,25 @@ namespace _3_WPF_Assignment
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry
-                .RegisterSingleton<IMessageBoxService, MessageBoxService>()
-                .RegisterSingleton<IEventAggregator, EventAggregator>()
-                .RegisterSingleton<ShellViewModel, ShellViewModel>();
-
-            containerRegistry
-                .Register<PrimesViewModel, PrimesViewModel>()
-                .Register<InputViewModel, InputViewModel>();
-
             var container = Container.GetContainer();
 
+            container.Register<IMessageBoxService, MessageBoxService>(Reuse.Singleton);
+            container.Register<IEventAggregator, EventAggregator>(Reuse.Singleton);
+            container.Register<ShellViewModel, ShellViewModel>(Reuse.Singleton);
+
+            container.RegisterMapping<IShellViewModel, ShellViewModel>();
+
+            container.Register<PrimesViewModel, PrimesViewModel>();
+            container.Register<InputViewModel, InputViewModel>();
+
+            container.Register<OKCommand, OKCommand>();
+
             var shellViewModel = container.Resolve<ShellViewModel>();
-            container.InjectPropertiesAndFields(shellViewModel,new[]
+            container.InjectPropertiesAndFields(shellViewModel, new[]
             {
-                nameof(ShellViewModel.PrimesViewModel), 
-                nameof(ShellViewModel.InputViewModel)
+                nameof(ShellViewModel.PrimesViewModel),
+                nameof(ShellViewModel.InputViewModel),
+                nameof(ShellViewModel.OKCommand)
             });
         }
 
