@@ -9,9 +9,6 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="Shell" Height="250" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" UseLayoutRounding="True">
-    <!--<Window.DataContext>
-        <viewModels:ShellViewModel/>
-    </Window.DataContext>-->
     <Grid Margin="10,0,10,10">
 
         <Grid.ColumnDefinitions>

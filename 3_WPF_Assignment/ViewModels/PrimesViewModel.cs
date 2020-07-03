@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 using _3_WPF_Assignment.Events;
 using _3_WPF_Assignment.Models;
 using Prism.Events;
@@ -41,6 +44,26 @@ namespace _3_WPF_Assignment.ViewModels
             aggregator.GetEvent<NumberEvent>().Subscribe(number => Number = number);
         }
 
-        public void CalculatePrimes() => _primesModel.CalculatePrimes(_number);
+        public void CalculatePrimes()
+        {
+            var currentDispatcher = Dispatcher.CurrentDispatcher;
+
+            Task.Factory.StartNew(() =>
+            {
+                for (var i = 1ul; i <= 1000ul; i++)
+                {
+                    var local = i;
+
+                    currentDispatcher.InvokeAsync(() =>
+                    {
+                        Number = local;
+                    });
+
+                    Thread.Sleep(1000);
+                }
+            });
+
+            //_primesModel.CalculatePrimes(_number);
+        }
     }
 }
