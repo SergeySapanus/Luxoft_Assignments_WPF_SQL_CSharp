@@ -3,7 +3,7 @@ using MathHelpers;
 
 namespace _3_WPF_Assignment.Models
 {
-    public class PrimesModel
+    public class PrimesModel : IPrimesModel
     {
         #region Fields
 

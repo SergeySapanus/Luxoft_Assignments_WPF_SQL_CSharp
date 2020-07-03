@@ -72,11 +72,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\IOKCommand.cs" />
     <Compile Include="Commands\OKCommand.cs" />
     <Compile Include="Events\NumberEvent.cs" />
+    <Compile Include="Models\IPrimesModel.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
+    <Compile Include="ViewModels\IInputViewModel.cs" />
     <Compile Include="ViewModels\InputViewModel.cs" />
+    <Compile Include="ViewModels\IPrimesViewModel.cs" />
     <Compile Include="ViewModels\IShellViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\PrimesViewModel.cs" />

@@ -17,20 +17,20 @@ namespace _3_WPF_Assignment
         {
             var container = Container.GetContainer();
 
+            container.Register<IOKCommand, OKCommand>(Reuse.Singleton);
             container.Register<IMessageBoxService, MessageBoxService>(Reuse.Singleton);
             container.Register<IEventAggregator, EventAggregator>(Reuse.Singleton);
-            container.Register<ShellViewModel, ShellViewModel>(Reuse.Singleton);
 
-            container.RegisterMapping<IShellViewModel, ShellViewModel>();
+            container.Register<IPrimesModel, PrimesModel>();
+            container.Register<IPrimesViewModel, PrimesViewModel>();
+            container.Register<IInputViewModel, InputViewModel>();
 
-            container.Register<PrimesModel, PrimesModel>();
-
-            container.Register<PrimesViewModel, PrimesViewModel>();
-            container.Register<InputViewModel, InputViewModel>();
+            container.Register<IShellViewModel, ShellViewModel>(Reuse.Singleton);
+            container.RegisterMapping<ShellViewModel, IShellViewModel>();
 
             container.Register<OKCommand, OKCommand>();
 
-            var shellViewModel = container.Resolve<ShellViewModel>();
+            var shellViewModel = container.Resolve<IShellViewModel>();
             container.InjectPropertiesAndFields(shellViewModel, new[]
             {
                 nameof(ShellViewModel.PrimesViewModel),

@@ -6,7 +6,7 @@ using Prism.Commands;
 
 namespace _3_WPF_Assignment.Commands
 {
-    public class OKCommand : DelegateCommand<object>
+    public class OKCommand : DelegateCommand<object>, IOKCommand
     {
         #region Fields
 

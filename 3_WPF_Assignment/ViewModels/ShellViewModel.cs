@@ -12,10 +12,10 @@ namespace _3_WPF_Assignment.ViewModels
         #endregion Fields
         #region Properties
 
-        public OKCommand OKCommand { get; set; }
+        public IOKCommand OKCommand { get; set; }
 
-        public PrimesViewModel PrimesViewModel { get; set; }
-        public InputViewModel InputViewModel { get; set; }
+        public IPrimesViewModel PrimesViewModel { get; set; }
+        public IInputViewModel InputViewModel { get; set; }
 
         #endregion Properties
 

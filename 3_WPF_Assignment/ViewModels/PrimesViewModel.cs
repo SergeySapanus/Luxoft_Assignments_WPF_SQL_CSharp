@@ -6,11 +6,11 @@ using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
 {
-    public class PrimesViewModel : BindableBase
+    public class PrimesViewModel : BindableBase, IPrimesViewModel
     {
         #region Fields
 
-        private readonly PrimesModel _primesModel;
+        private readonly IPrimesModel _primesModel;
 
         private ulong? _number;
 
@@ -34,7 +34,7 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
-        public PrimesViewModel(IEventAggregator aggregator, PrimesModel primesModel)
+        public PrimesViewModel(IEventAggregator aggregator, IPrimesModel primesModel)
         {
             _primesModel = primesModel;
 

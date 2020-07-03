@@ -5,7 +5,7 @@ using Prism.Mvvm;
 
 namespace _3_WPF_Assignment.ViewModels
 {
-    public class InputViewModel : BindableBase
+    public class InputViewModel : BindableBase, IInputViewModel
     {
         #region Fields
 
