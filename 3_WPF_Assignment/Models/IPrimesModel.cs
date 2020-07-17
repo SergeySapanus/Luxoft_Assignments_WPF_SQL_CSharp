@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace _3_WPF_Assignment.Models
 {
@@ -8,6 +10,10 @@ namespace _3_WPF_Assignment.Models
 
         string GetPrimesUpCaption(ulong? number);
 
-        void CalculatePrimes(ulong? number);
+        void AddPrime(ulong prime);
+        void ClearPrimes();
+
+        IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit1, ulong limit);
+        Task<IEnumerable<ulong>> GetPrimesByEratosthenesSieveAsync(ulong sqrtLimit, ulong limit);
     }
 }

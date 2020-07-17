@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using _3_WPF_Assignment.Events;
 using _3_WPF_Assignment.Models;
+using MathHelpers;
 using Prism.Events;
 using Prism.Mvvm;
 
@@ -46,24 +47,28 @@ namespace _3_WPF_Assignment.ViewModels
 
         public void CalculatePrimes()
         {
+            if (!Number.HasValue)
+                return;
+
             var currentDispatcher = Dispatcher.CurrentDispatcher;
 
             Task.Factory.StartNew(() =>
             {
-                for (var i = 1ul; i <= 1000ul; i++)
-                {
-                    var local = i;
+                var primesModel = (PrimesModel)_primesModel;
 
+                currentDispatcher.Invoke(() =>
+                {
+                    primesModel.ClearPrimes();
+                });
+
+                foreach (var item in primesModel.GetPrimesByEratosthenesSieve(Number.Value, WPFAssignmentHelper.Power2(Number.Value)))
+                {
                     currentDispatcher.InvokeAsync(() =>
                     {
-                        Number = local;
+                        primesModel.AddPrime(item);
                     });
-
-                    Thread.Sleep(1000);
                 }
             });
-
-            //_primesModel.CalculatePrimes(_number);
         }
     }
 }

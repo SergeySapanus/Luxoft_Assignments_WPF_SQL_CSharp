@@ -42,7 +42,7 @@
         <ListBox  Name="lbPrimes" 
                   Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"  
                   Style="{StaticResource listBoxStyle}"
-                  ItemsSource="{Binding PrimesViewModel.Primes}"
+                  ItemsSource="{Binding PrimesViewModel.Primes, Mode=OneWay}"
                   SelectedItem="{Binding SelectedPrime, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" 

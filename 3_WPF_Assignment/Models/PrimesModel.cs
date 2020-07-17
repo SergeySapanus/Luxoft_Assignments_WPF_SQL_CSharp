@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading;
 using System.Threading.Tasks;
 using MathHelpers;
 
@@ -35,29 +34,25 @@ namespace _3_WPF_Assignment.Models
             return $"Primes up to {WPFAssignmentHelper.Power2(input.Value)}:";
         }
 
-        public async void CalculatePrimes(ulong? input)
+        public void AddPrime(ulong prime)
+        {
+            _primes.Add(prime);
+        }
+
+        public void ClearPrimes()
         {
             _primes.Clear();
-
-            if (!input.HasValue)
-                return;
-
-            foreach (var prime in await GetPrimesByEratosthenesSieveAsync(input.Value, WPFAssignmentHelper.Power2(input.Value)))
-            {
-                _primes.Add(prime);
-            }
         }
 
-        private async Task<IEnumerable<ulong>> GetPrimesByEratosthenesSieveAsync(ulong sqrtLimit, ulong limit)
+        public async Task<IEnumerable<ulong>> GetPrimesByEratosthenesSieveAsync(ulong sqrtLimit, ulong limit)
         {
-            return await Task.Factory.StartNew(() => GetPrimesByEratosthenesSieve(sqrtLimit, limit));
+            return await Task.Factory.StartNew(() => GetPrimesByEratosthenesSieve(sqrtLimit, limit)).ConfigureAwait(false);
         }
 
-        private IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit1, ulong limit1)
+        public IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit1, ulong limit)
         {
-            foreach (var prime in WPFAssignmentHelper.GetPrimesByEratosthenesSieve(sqrtLimit1, limit1))
+            foreach (var prime in WPFAssignmentHelper.GetPrimesByEratosthenesSieve(sqrtLimit1, limit))
             {
-                //Thread.Sleep(1000);
                 yield return prime;
             }
         }
