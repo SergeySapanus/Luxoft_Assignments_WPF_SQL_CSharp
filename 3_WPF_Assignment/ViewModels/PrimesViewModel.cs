@@ -15,8 +15,11 @@ namespace _3_WPF_Assignment.ViewModels
         #region Fields
 
         private readonly IPrimesModel _primesModel;
-
         private ulong? _number;
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly Dispatcher _currentDispatcher = Dispatcher.CurrentDispatcher;
+        private Task _currentTask;
 
         #endregion Fields
         #region Properties
@@ -45,28 +48,47 @@ namespace _3_WPF_Assignment.ViewModels
             aggregator.GetEvent<NumberEvent>().Subscribe(number => Number = number);
         }
 
-        public void CalculatePrimes()
+        private void CalculatePrimes()
         {
             if (!Number.HasValue)
                 return;
 
-            var currentDispatcher = Dispatcher.CurrentDispatcher;
-
-            Task.Factory.StartNew(() =>
+            if (_currentTask != null)
             {
-                var primesModel = (PrimesModel)_primesModel;
+                _cancellationTokenSource.Cancel();
+                _currentTask.Wait();
+            }
 
-                currentDispatcher.Invoke(() =>
+            _currentTask = Task.Factory.StartNew(() =>
+            {
+                _currentDispatcher.InvokeAsync(() =>
                 {
-                    primesModel.ClearPrimes();
-                });
+                    _primesModel.ClearPrimes();
+                }).Wait();
 
-                foreach (var item in primesModel.GetPrimesByEratosthenesSieve(Number.Value, WPFAssignmentHelper.Power2(Number.Value)))
+                foreach (var item in _primesModel.GetPrimesByEratosthenesSieve(Number.Value, WPFAssignmentHelper.Power2(Number.Value)))
                 {
-                    currentDispatcher.InvokeAsync(() =>
+                    _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+
+                    _currentDispatcher.InvokeAsync(() =>
                     {
-                        primesModel.AddPrime(item);
+                        _primesModel.AddPrime(item);
                     });
+                }
+            }, _cancellationTokenSource.Token).ContinueWith(task =>
+            {
+                switch (task.Status)
+                {
+                    case TaskStatus.RanToCompletion:
+                        {
+                            _currentTask = null;
+                        }
+                        break;
+                    case TaskStatus.Canceled:
+                        {
+                            _cancellationTokenSource = new CancellationTokenSource();
+                        }
+                        break;
                 }
             });
         }

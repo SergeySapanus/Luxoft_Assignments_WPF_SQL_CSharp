@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using MathHelpers;
 
 namespace _3_WPF_Assignment.Models
@@ -42,11 +41,6 @@ namespace _3_WPF_Assignment.Models
         public void ClearPrimes()
         {
             _primes.Clear();
-        }
-
-        public async Task<IEnumerable<ulong>> GetPrimesByEratosthenesSieveAsync(ulong sqrtLimit, ulong limit)
-        {
-            return await Task.Factory.StartNew(() => GetPrimesByEratosthenesSieve(sqrtLimit, limit)).ConfigureAwait(false);
         }
 
         public IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit1, ulong limit)

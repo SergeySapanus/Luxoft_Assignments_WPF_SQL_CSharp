@@ -14,6 +14,5 @@ namespace _3_WPF_Assignment.Models
         void ClearPrimes();
 
         IEnumerable<ulong> GetPrimesByEratosthenesSieve(ulong sqrtLimit1, ulong limit);
-        Task<IEnumerable<ulong>> GetPrimesByEratosthenesSieveAsync(ulong sqrtLimit, ulong limit);
     }
 }
