@@ -33,8 +33,6 @@ namespace _3_WPF_Assignment
             var shellViewModel = container.Resolve<IShellViewModel>();
             container.InjectPropertiesAndFields(shellViewModel, new[]
             {
-                nameof(ShellViewModel.PrimesViewModel),
-                nameof(ShellViewModel.InputViewModel),
                 nameof(ShellViewModel.OKCommand)
             });
         }

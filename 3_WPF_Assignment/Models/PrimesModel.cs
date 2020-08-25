@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using MathHelpers;
 
 namespace _3_WPF_Assignment.Models

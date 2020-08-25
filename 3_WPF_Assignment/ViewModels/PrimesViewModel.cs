@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -41,6 +42,12 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
+        public event NotifyCollectionChangedEventHandler PrimesCollectionChanged
+        {
+            add => ((INotifyCollectionChanged)_primesModel.Primes).CollectionChanged += value;
+            remove => ((INotifyCollectionChanged)_primesModel.Primes).CollectionChanged -= value;
+        }
+
         public PrimesViewModel(IEventAggregator aggregator, IPrimesModel primesModel)
         {
             _primesModel = primesModel;
@@ -55,25 +62,26 @@ namespace _3_WPF_Assignment.ViewModels
 
             if (_currentTask != null)
             {
-                _cancellationTokenSource.Cancel();
-                _currentTask.Wait();
+                _cancellationTokenSource
+                    .Cancel();
+                _currentTask
+                    .Wait();
             }
 
             _currentTask = Task.Factory.StartNew(() =>
             {
-                _currentDispatcher.InvokeAsync(() =>
-                {
-                    _primesModel.ClearPrimes();
-                }).Wait();
+                _currentDispatcher
+                    .InvokeAsync(() => { _primesModel.ClearPrimes(); })
+                    .Wait();
 
                 foreach (var item in _primesModel.GetPrimesByEratosthenesSieve(Number.Value, WPFAssignmentHelper.Power2(Number.Value)))
                 {
-                    _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+                    _cancellationTokenSource
+                        .Token
+                        .ThrowIfCancellationRequested();
 
-                    _currentDispatcher.InvokeAsync(() =>
-                    {
-                        _primesModel.AddPrime(item);
-                    });
+                    _currentDispatcher
+                        .InvokeAsync(() => { _primesModel.AddPrime(item); });
                 }
             }, _cancellationTokenSource.Token).ContinueWith(task =>
             {
