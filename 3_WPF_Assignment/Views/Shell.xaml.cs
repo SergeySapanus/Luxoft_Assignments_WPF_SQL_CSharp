@@ -21,22 +21,22 @@ namespace _3_WPF_Assignment.Views
             var dataContext = ShellDataContext;
             if (dataContext != null)
             {
-                dataContext.PrimesCollectionChanged += DataContext_PrimesCollectionChanged;
+                dataContext.OnAddPrime += DataContext_OnAddPrime;
             }
         }
 
-        private void DataContext_PrimesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void DataContext_OnAddPrime(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                case NotifyCollectionChangedAction.Remove:
-                case NotifyCollectionChangedAction.Move:
-                case NotifyCollectionChangedAction.Replace:
+                {
+                    var item = e.NewItems[0];
+                    if (item != null)
                     {
-                        var item = lbPrimes.Items.GetItemAt(e.NewStartingIndex);
                         lbPrimes.ScrollIntoView(item);
                     }
+                }
                     break;
             }
         }
@@ -46,7 +46,7 @@ namespace _3_WPF_Assignment.Views
             var dataContext = ShellDataContext;
             if (dataContext != null)
             {
-                dataContext.PrimesCollectionChanged -= DataContext_PrimesCollectionChanged;
+                dataContext.OnAddPrime -= DataContext_OnAddPrime;
             }
 
             var disposable = DataContext as IDisposable;

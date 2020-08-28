@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using _3_WPF_Assignment.Commands;
 using Prism.Mvvm;
 
@@ -31,10 +32,10 @@ namespace _3_WPF_Assignment.ViewModels
 
         public ulong? Number => PrimesViewModel.Number;
 
-        public event NotifyCollectionChangedEventHandler PrimesCollectionChanged
+        public event EventHandler<NotifyCollectionChangedEventArgs> OnAddPrime
         {
-            add => PrimesViewModel.PrimesCollectionChanged +=value;
-            remove => PrimesViewModel.PrimesCollectionChanged -= value;
+            add => PrimesViewModel.OnAddPrime +=value;
+            remove => PrimesViewModel.OnAddPrime -= value;
         }
 
         public object SelectedPrime

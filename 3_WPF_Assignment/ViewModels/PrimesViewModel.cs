@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,11 +43,7 @@ namespace _3_WPF_Assignment.ViewModels
 
         #endregion Properties
 
-        public event NotifyCollectionChangedEventHandler PrimesCollectionChanged
-        {
-            add => ((INotifyCollectionChanged)_primesModel.Primes).CollectionChanged += value;
-            remove => ((INotifyCollectionChanged)_primesModel.Primes).CollectionChanged -= value;
-        }
+        public event EventHandler<NotifyCollectionChangedEventArgs> OnAddPrime;
 
         public PrimesViewModel(IEventAggregator aggregator, IPrimesModel primesModel)
         {
@@ -79,9 +76,15 @@ namespace _3_WPF_Assignment.ViewModels
                     _cancellationTokenSource
                         .Token
                         .ThrowIfCancellationRequested();
-
+                    
+                    Thread.Sleep(10);
+                    
                     _currentDispatcher
-                        .InvokeAsync(() => { _primesModel.AddPrime(item); });
+                        .InvokeAsync(() =>
+                        {
+                            _primesModel.AddPrime(item);
+                            OnAddPrime?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+                        });
                 }
             }, _cancellationTokenSource.Token).ContinueWith(task =>
             {
