@@ -40,6 +40,7 @@ namespace _3_WPF_Assignment.Commands
         private static void OKCommand_Execute(object sender)
         {
             _messageBoxService.ShowMessage($"You have chosen {_shellViewModel.Number} and {_shellViewModel.SelectedPrime}");
+            _shellViewModel.SelectedPrime = null;
         }
     }
 }

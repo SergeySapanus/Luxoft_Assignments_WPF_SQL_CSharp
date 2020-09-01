@@ -31,6 +31,11 @@ namespace _3_WPF_Assignment.Views
             {
                 case NotifyCollectionChangedAction.Add:
                 {
+                    if (lbPrimes.SelectedIndex >= 0)
+                    {
+                        return;
+                    }
+                
                     var item = e.NewItems[0];
                     if (item != null)
                     {
