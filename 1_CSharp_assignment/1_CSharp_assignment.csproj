@@ -10,6 +10,10 @@
     <PackageReference Include="AutoFixture" Version="4.11.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Math\MathHelpers.csproj" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="copy &quot;$(SolutionDir)\Data\*.*&quot; &quot;$(TargetDir)\*.*&quot;" />
   </Target>

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using MathHelpers;
 
 namespace _1_CSharp_Assignment
 {
@@ -19,7 +19,7 @@ namespace _1_CSharp_Assignment
             try
             {
                 var encoding = GetEncoding(DATA_FILE_PATH);
-                var sortedByWord = GetSortedDataFromFile(DATA_FILE_PATH, encoding, COUNT_UNIQUE_WORDS_THRESHOLD, LENGTH_WORD_THRESHOLD);
+                var sortedByWord = CSharpAssignmentHelper.GetSortedDataFromFile(DATA_FILE_PATH, encoding, COUNT_UNIQUE_WORDS_THRESHOLD, LENGTH_WORD_THRESHOLD);
 #if DEBUG
                 for (var i = 0; i < sortedByWord.Count; i++)
                 {
@@ -28,7 +28,7 @@ namespace _1_CSharp_Assignment
 
                 Console.WriteLine(new string('-', 10));
 #endif
-                var sortedByNumber = QuickSortByNumber(sortedByWord);
+                var sortedByNumber = CSharpAssignmentHelper.QuickSortByNumber(sortedByWord);
 #if DEBUG
                 foreach (var pair in sortedByNumber)
                 {
@@ -43,51 +43,6 @@ namespace _1_CSharp_Assignment
             {
                 Console.WriteLine(e.Message);
             }
-        }
-
-        private static SortedList<string, int> GetSortedDataFromFile(string filePath, Encoding encoding,
-            int lengthWordThreshold, int countUniqueWordsThreshold)
-        {
-            var stringBuilder = new StringBuilder(lengthWordThreshold);
-            var sortedList = new SortedList<string, int>(countUniqueWordsThreshold);
-
-            using (var streamReader = new StreamReader(filePath, encoding))
-            {
-                int intSymbol;
-
-                while ((intSymbol = streamReader.Read()) >= 0 || stringBuilder.Length > 0)
-                {
-                    var charSymbol = (char)intSymbol;
-
-                    if (intSymbol == -1 || char.IsSeparator(charSymbol) || char.IsControl(charSymbol))
-                    {
-                        if (stringBuilder.Length == 0)
-                            continue;
-
-                        var key = stringBuilder.ToString();
-
-                        if (sortedList.TryGetValue(key, out var value))
-                        {
-                            sortedList[key] = ++value;
-                        }
-                        else
-                        {
-                            sortedList.Add(key, 1);
-                        }
-
-                        stringBuilder.Clear();
-                    }
-                    else
-                    {
-                        if (char.IsUpper(charSymbol))
-                            charSymbol = char.ToLower(charSymbol);
-
-                        stringBuilder.Append(charSymbol);
-                    }
-                }
-            }
-
-            return sortedList;
         }
 
         private static Encoding GetEncoding(string filename)
@@ -116,19 +71,6 @@ namespace _1_CSharp_Assignment
                 return Encoding.UTF32;
 
             return Encoding.ASCII;
-        }
-
-        private static IEnumerable<KeyValuePair<string, int>> QuickSortByNumber(IEnumerable<KeyValuePair<string, int>> sequence)
-        {
-            var words = sequence /*as KeyValuePair<string, int>[] ?? sequence.ToArray()*/;
-            if (words.Count() <= 1)
-                return words;
-
-            var pivot = words.First();
-            var less = words.Skip(1).Where(x => x.Value <= pivot.Value);
-            var greater = words.Skip(1).Where(x => x.Value > pivot.Value);
-
-            return QuickSortByNumber(greater).Union(new[] { pivot }).Union(QuickSortByNumber(less));
         }
     }
 }
